@@ -33,7 +33,16 @@ plot_dataset <- function(d,susie_obj=NULL,
                          ...) {
   if(!("position" %in% names(d)))
     stop("no position element given")
-  p=pnorm(-abs(d$beta/sqrt(d$varbeta))) * 2
+  
+  if(!("pvalues" %in% names(d) | ("beta" %in% names(d) & "varbeta" %in% names(d)))
+    stop("must supply pvalues, or beta and varbeta")
+  
+  if("pvalues" %in% names(d)) {
+    p=d$pvalues
+   else { 
+    p=pnorm(-abs(d$beta/sqrt(d$varbeta))) * 2
+   }  
+    
   plot(d$position,-log10(p),xlab="Position",pch=16,col="grey")#,...)
   if(!is.null(susie_obj)) {
     cs=susie_obj$sets$cs
