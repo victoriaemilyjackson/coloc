@@ -125,7 +125,7 @@ sensitivity <- function(obj,rule="",
   if("z" %in% names(dataset2)) {
          df2=with(dataset2,data.table(snp=snp,position=position,z.df2=z))       
      } else {  
-        df2=with(dataset1,data.table(snp=snp,position=position,z.df2=beta/sqrt(varbeta)))
+        df2=with(dataset2,data.table(snp=snp,position=position,z.df2=beta/sqrt(varbeta)))
      }       
   
     df=merge(df1,df2,by=c("snp","position"),all=TRUE)
