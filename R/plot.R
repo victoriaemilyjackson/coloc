@@ -34,7 +34,7 @@ plot_dataset <- function(d,susie_obj=NULL,
   if(!("position" %in% names(d)))
     stop("no position element given")
   
-  if(!("pvalues" %in% names(d) | ("beta" %in% names(d) & "varbeta" %in% names(d)))
+  if(!("pvalues" %in% names(d) | ("beta" %in% names(d) & "varbeta" %in% names(d))))
     stop("must supply pvalues, or beta and varbeta")
   
   if("pvalues" %in% names(d)) {
