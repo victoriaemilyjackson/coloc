@@ -39,7 +39,7 @@ plot_dataset <- function(d,susie_obj=NULL,
   
   if("pvalues" %in% names(d)) {
     p=d$pvalues
-   else { 
+   } else { 
     p=pnorm(-abs(d$beta/sqrt(d$varbeta))) * 2
    }  
     
