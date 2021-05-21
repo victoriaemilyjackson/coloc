@@ -117,8 +117,17 @@ sensitivity <- function(obj,rule="",
   }
   ## need to add z score from datasets?
   if(!is.null(dataset1) && !is.null(dataset2)) {
-    df1=with(dataset1,data.table(snp=snp,position=position,z.df1=beta/sqrt(varbeta)))
-    df2=with(dataset2,data.table(snp=snp,position=position,z.df2=beta/sqrt(varbeta)))
+    if("z" %in% names(dataset1)) {
+         df1=with(dataset1,data.table(snp=snp,position=position,z.df1=z))       
+     } else {  
+        df1=with(dataset1,data.table(snp=snp,position=position,z.df1=beta/sqrt(varbeta)))
+     }
+  if("z" %in% names(dataset2)) {
+         df2=with(dataset2,data.table(snp=snp,position=position,z.df2=z))       
+     } else {  
+        df2=with(dataset1,data.table(snp=snp,position=position,z.df2=beta/sqrt(varbeta)))
+     }       
+  
     df=merge(df1,df2,by=c("snp","position"),all=TRUE)
     results=merge(results,df,by="snp")
   }
